@@ -1,0 +1,81 @@
+<app-menu-principal></app-menu-principal>
+<div class="container">
+  <div class="roboto margem-superior-padrao fonte-pequena">
+    <p>Caso já possua um cadastro, faça o
+      <a routerLink="/login">login</a> para publicar suas vagas de emprego.</p>
+    <p>Caso sua empresa não possua um cadastro e você deseja publicar uma vaga de emprego, preencha os campos abaixo para cadastrar
+      a empresa e logo após estará apto a publicar suas oportunidades de trabalho.</p>
+  </div>
+  <hr>
+  <div>
+    <form [formGroup]="frmEmpresa">
+      <fieldset>
+        <legend class="text-center">Cadastrar Empresa</legend>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <label>Nome Completo</label>
+              <input type="text" class="form-control" formControlName="nomeUsuario" [ngClass]="{'is-invalid': !frmEmpresa.controls.nomeUsuario.valid && !frmEmpresa.controls.nomeUsuario.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.nomeUsuario.valid && !frmEmpresa.controls.nomeUsuario.pristine">Nome incorreto</span>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label>E-mail</label>
+              <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': !frmEmpresa.controls.email.valid && !frmEmpresa.controls.email.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.email.valid && !frmEmpresa.controls.email.pristine">E-mail inválido</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <label>Senha</label>
+              <input type="password" class="form-control" formControlName="senha" [ngClass]="{'is-invalid': !frmEmpresa.controls.senha.valid && !frmEmpresa.controls.senha.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.senha.valid && !frmEmpresa.controls.senha.pristine">Senha inválida</span>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label>Confirmação de Senha</label>
+              <input type="password" class="form-control" formControlName="confirmacaoSenha" [ngClass]="{'is-invalid': !frmEmpresa.controls.confirmacaoSenha.valid && !frmEmpresa.controls.confirmacaoSenha.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.confirmacaoSenha.valid && !frmEmpresa.controls.confirmacaoSenha.pristine">Confirmação de senha inválida</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <label>Nome da Empresa</label>
+              <input type="text" class="form-control" formControlName="nomeEmpresa" [ngClass]="{'is-invalid': !frmEmpresa.controls.nomeEmpresa.valid && !frmEmpresa.controls.nomeEmpresa.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.nomeEmpresa.valid && !frmEmpresa.controls.nomeEmpresa.pristine">Nome da empresa inválido</span>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <label>Cidade</label>
+              <select class="form-control" formControlName="cidade" [ngClass]="{'is-invalid': !frmEmpresa.controls.cidade.valid && !frmEmpresa.controls.cidade.pristine}">
+                <option *ngFor="let cidade of cidades" value="{{cidade.cidade}}">{{cidade.cidade}}</option>
+              </select>
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.cidade.valid && !frmEmpresa.controls.cidade.pristine">Cidade inválida</span>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <label>Site</label>
+              <input type="url" class="form-control" formControlName="site" [ngClass]="{'is-invalid': !frmEmpresa.controls.site.valid && !frmEmpresa.controls.site.pristine}">
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.site.valid && !frmEmpresa.controls.site.pristine">Site inválido</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <label>Descrição da Empresa</label>
+              <br>
+              <textarea class="largura-total" rows="5" formControlName="descricao" [ngClass]="{'is-invalid': !frmEmpresa.controls.descricao.valid && !frmEmpresa.controls.descricao.pristine}"></textarea>
+              <span class="text-danger" *ngIf="!frmEmpresa.controls.descricao.valid && !frmEmpresa.controls.descricao.pristine">Site inválido</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 text-center">
+              <button id="btnCadastraEmpresa" type="button" class="btn btn-success" (click)="cadastrarEmpresa()" [disabled]="!frmEmpresa.valid">Cadastrar Empresa</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <app-alerta-component></app-alerta-component>
+
+  </div>
+</div>
+<div class="margem-superior-padrao">
+  <app-rodape></app-rodape>
+</div>

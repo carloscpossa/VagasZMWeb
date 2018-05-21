@@ -1,0 +1,119 @@
+<app-menu-empresa></app-menu-empresa>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-2">
+            <div>
+                <form [formGroup]="frmPesquisaVaga">
+                    <fieldset>
+                        <legend class="">Buscar vagas por:</legend>
+
+                        <label>Cargo</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="cargo">
+
+                        <label>Descrição</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="descricao">
+
+                        <label>Área Profissional</label>
+                        <select class="form-control form-control-sm" formControlName="areaProfissionalId">
+                            <option *ngFor="let areaProfissional of areasProfissionais" value="{{areaProfissional.id}}">{{areaProfissional.nome}}</option>
+                        </select>
+
+                        <label>Tipo de Contratação</label>
+                        <select class="form-control form-control-sm" formControlName="tipoContratacaoId">
+                            <option *ngFor="let tipo of tiposContratacao" value="{{tipo.id}}">{{tipo.nome}}</option>
+                        </select>
+
+                        <label>Faixa Salarial</label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <input type="number" class="form-control form-control-sm" placeholder="de" formControlName="salarioInicial">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <input type="number" class="form-control form-control-sm" placeholder="até" formControlName="salarioFinal">
+                            </div>
+                        </div>
+
+                        <label>Status</label>
+                        <select class="form-control form-control-sm" formControlName="status">
+                            <option value="0">Todos</option>
+                            <option value="1">Aberta</option>
+                            <option value="2">Encerrada</option>
+                        </select>
+
+                        <div class="margem-superior-pequena">
+                            <button id="btnPesqVaga" type="button" class="btn btn-success largura-total" (click)="pesquisarVagas()">Pesquisar Vagas</button>
+                        </div>
+
+                        <div class="margem-superior-pequena">
+                            <button type="button" class="btn btn-primary largura-total" (click)="limparFiltros()">Limpar critérios</button>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-10">
+            <div class="margem-superior-grande fonte-pequena">
+
+                <div *ngIf="vagasEmprego.length>0">
+                    <div id="accordion">
+                        <div class="card" *ngFor="let vaga of vagasEmprego">
+                            <div class="card-header" id="headingOne">
+                                <div class="row">
+
+                                    <div class="col-sm-12 col-md-9">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-sm" [ngClass]="{'btn-outline-success': vaga.descricaoStatus=='Aberta', 'btn-outline-danger': vaga.descricaoStatus!='Aberta'}"
+                                                data-toggle="collapse" [attr.data-target]="'#' + vagasEmprego.indexOf(vaga)"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                                {{vaga.cargo}}
+                                            </button>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <small [ngClass]="{'text-success': vaga.descricaoStatus=='Aberta', 'text-danger': vaga.descricaoStatus!='Aberta'}">{{vaga.descricaoStatus}}</small>
+                                        </h5>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div class="text-right">
+                                            <p>Data de Inclusão: {{vaga.dataCriacao | date: 'dd/MM/yyyy'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="{{vagasEmprego.indexOf(vaga)}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <dl>
+                                        <dt>Descrição da vaga</dt>
+                                        <dd>{{vaga.descricao}}</dd>
+                                        <dt>Benefícios</dt>
+                                        <dd>{{vaga.beneficios}}</dd>
+                                        <dt>Horário de Trabalho</dt>
+                                        <dd>{{vaga.horarioTrabalho}}</dd>
+                                        <dt>Salário</dt>
+                                        <dd *ngIf="vaga.salarioAcombinar">A combinar</dd>
+                                        <dd *ngIf="!vaga.salarioAcombinar">{{vaga.salario | currency:'BRL':true:'2.2-2'}}</dd>
+                                        <dt>Área Profissional</dt>
+                                        <dd>{{vaga.areaProfissional}}</dd>
+                                        <dt>Tipo de Contratação</dt>
+                                        <dd>{{vaga.tipoContratacao}}</dd>
+                                        <dt>Data de Expiração</dt>
+                                        <dd>{{vaga.dataExpiracao | date: 'dd/MM/yyyy'}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" id="divLoad">
+                    <i class="fa fa-refresh fa-spin fa-5x fa-fw"></i>
+                    <span class="sr-only">Carregando...</span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="margem-superior-padrao">
+    <app-rodape></app-rodape>
+</div>

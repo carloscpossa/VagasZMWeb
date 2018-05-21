@@ -1,0 +1,42 @@
+<app-menu-principal></app-menu-principal>
+<div class="container">
+
+  <form class="margem-superior-grande" [formGroup]="frmLogin">
+    <fieldset>
+      <legend class="text-center">Login</legend>
+      <div class="row">
+        <div class="col-sm"></div>
+
+        <div class="col-sm">
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': !frmLogin.controls.email.valid && !frmLogin.controls.email.pristine}">
+            <span class="text-danger" *ngIf="!frmLogin.controls.email.valid && !frmLogin.controls.email.pristine">E-mail inválido</span>
+          </div>
+          <div class="form-group">
+            <label>Senha</label>
+            <input type="password" class="form-control" formControlName="senha" [ngClass]="{'is-invalid': !frmLogin.controls.senha.valid && !frmLogin.controls.senha.pristine}">
+            <span class="text-danger" *ngIf="!frmLogin.controls.senha.valid && !frmLogin.controls.senha.pristine">Senha inválida</span>
+          </div>
+
+          <button (click)="loginCandidato()" type="button" class="btn btn-success btn-block" [disabled]="!frmLogin.valid">Entrar como Candidato</button>
+          <button id="btnLoginEmpresa" (click)="loginEmpresa()" type="button" class="btn btn-primary btn-block" [disabled]="!frmLogin.valid">Entrar como Empresa</button>
+
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="row margem-superior-padrao">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <app-alerta-component></app-alerta-component>
+    </div>
+    <div class="col-sm"></div>
+  </div>
+
+</div>
+<div class="margem-superior-grande">
+  <app-rodape></app-rodape>
+</div>

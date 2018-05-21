@@ -1,0 +1,81 @@
+<app-menu-empresa></app-menu-empresa>
+<div class="container">
+  <div>
+    <form [formGroup]="frmVaga">
+      <fieldset>
+        <legend class="text-center">Publicar nova vaga</legend>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <label>Cargo</label>
+              <input type="text" class="form-control" formControlName="cargo" [ngClass]="{'is-invalid': !frmVaga.controls.cargo.valid && !frmVaga.controls.cargo.pristine}">
+              <span class="text-danger" *ngIf="!frmVaga.controls.cargo.valid && !frmVaga.controls.cargo.pristine">Cargo inválido.</span>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label>Área Profissional</label>
+              <select class="form-control" formControlName="areaProfissionalId" [ngClass]="{'is-invalid': !frmVaga.controls.areaProfissionalId.valid && !frmVaga.controls.areaProfissionalId.pristine}">
+                <option *ngFor="let areaProfissional of areasProfissionais" value="{{areaProfissional.id}}">{{areaProfissional.nome}}</option>
+              </select>
+              <span class="text-danger" *ngIf="!frmVaga.controls.areaProfissionalId.valid && !frmVaga.controls.areaProfissionalId.pristine">Cargo inválido.</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <label>Descrição da Vaga</label>
+              <textarea cols="30" rows="5" class="form-control" formControlName="descricao" [ngClass]="{'is-invalid': !frmVaga.controls.descricao.valid && !frmVaga.controls.descricao.pristine}"></textarea>
+              <span class="text-danger" *ngIf="!frmVaga.controls.descricao.valid && !frmVaga.controls.descricao.pristine">Descrição inválida.</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-3">
+              <label>Horário de Trabalho</label>
+              <input type="text" class="form-control" formControlName="horarioTrabalho" [ngClass]="{'is-invalid': !frmVaga.controls.horarioTrabalho.valid && !frmVaga.controls.horarioTrabalho.pristine}">
+              <span class="text-danger" *ngIf="!frmVaga.controls.horarioTrabalho.valid && !frmVaga.controls.horarioTrabalho.pristine">Horário de trabalho inválido</span>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <label>Regime de contratação</label>
+              <select class="form-control" formControlName="tipoContratacaoId" [ngClass]="{'is-invalid': !frmVaga.controls.tipoContratacaoId.valid && !frmVaga.controls.tipoContratacaoId.pristine}">
+                <option *ngFor="let tipo of tiposContratacao" value="{{tipo.id}}">{{tipo.nome}}</option>
+              </select>
+              <span class="text-danger" *ngIf="!frmVaga.controls.tipoContratacaoId.valid && !frmVaga.controls.tipoContratacaoId.pristine">Regime de contratação inválido</span>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <label>Salário a combinar</label>
+              <div class="form-check">
+                <input type="radio" id="salarioAcombinarTrue" name="salarioAcombinar" fromControlName="salarioAcombinar" value="true" (change)="salarioCombinar(false)"> Sim &nbsp; &nbsp; &nbsp;
+                <input type="radio" id="salarioAcombinarFalse" name="salarioAcombinar" fromControlName="salarioAcombinar" [checked]="true"
+                  value="false" (change)="salarioCombinar(true)"> Não
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <label>Salário</label>
+              <input type="number" class="form-control" id="salario" formControlName="salario" [ngClass]="{'is-invalid': !frmVaga.controls.salario.valid && !frmVaga.controls.salario.pristine}">
+              <span class="text-danger" *ngIf="!frmVaga.controls.salario.valid && !frmVaga.controls.salario.pristine">Salário inválido</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <label>Benefícios</label>
+              <textarea cols="30" rows="5" class="form-control" formControlName="beneficios" [ngClass]="{'is-invalid': !frmVaga.controls.beneficios.valid && !frmVaga.controls.beneficios.pristine}"></textarea>
+              <span class="text-danger" *ngIf="!frmVaga.controls.beneficios.valid && !frmVaga.controls.beneficios.pristine">Benefícios inválidos.</span>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 text-center">
+              <button id="btnPublicarVaga" type="button" class="btn btn-success" (click)="publicarVaga()" [disabled]="!frmVaga.valid">Publicar Vaga</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+    </form>
+    <app-alerta-component></app-alerta-component>
+
+  </div>
+</div>
+<app-rodape></app-rodape>
