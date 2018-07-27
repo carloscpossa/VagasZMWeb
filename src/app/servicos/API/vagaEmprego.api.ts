@@ -44,30 +44,30 @@ export class VagaEmpregoAPI {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json',  'Authorization': `Bearer ${token}`})
         //headers.append('Authorization', `Bearer ${token}`);        
 
-        let parametros = new HttpParams
+        let parametros = new HttpParams();
         if (cargo) {
-            parametros.append('cargo', cargo);
+            parametros = parametros.append('cargo', cargo);
         }        
 
         if (descricao){
-            parametros.append('descricao', descricao);
+            parametros = parametros.append('descricao', descricao);
         }
 
         if (areaProfissionalId){
-            parametros.append('areaProfissionalId', areaProfissionalId);
+            parametros = parametros.append('areaProfissionalId', areaProfissionalId);
         }
 
         if (tipoContratacaoId){
-            parametros.append('tipoContratacaoId', tipoContratacaoId);
+            parametros = parametros.append('tipoContratacaoId', tipoContratacaoId);
         }
 
         if (status){
-            parametros.append('status', status.toString());
+            parametros = parametros.append('status', status.toString());
         }
 
         if (salarioInicial && salarioFinal){
-            parametros.append('salarioInicial', salarioInicial.toString());
-            parametros.append('salarioFinal', salarioFinal.toString());
+            parametros = parametros.append('salarioInicial', salarioInicial.toString());
+            parametros = parametros.append('salarioFinal', salarioFinal.toString());
         }        
 
         return this.http.get(url, {
