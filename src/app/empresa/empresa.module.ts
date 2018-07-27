@@ -5,14 +5,13 @@ import { CompartilhadoModule } from '../compartilhado/compartilhado.module';
 import { MenuEmpresaComponent } from './componentes/menu-empresa/menu-empresa.component';
 import { PrincipalEmpresaComponent } from './paginas/principal-empresa/principal-empresa.component';
 import { PublicarVagaComponent } from './paginas/publicar-vaga/publicar-vaga.component';
+import { PesquisaVagasComponent } from './componentes/pesquisa-vagas/pesquisa-vagas.component';
 
 
 // Rotas
 import { Routing, RoutingProviders } from './empresa.rotas';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 
 
 
@@ -27,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     MenuEmpresaComponent, 
-    PrincipalEmpresaComponent, PublicarVagaComponent
+    PrincipalEmpresaComponent, PublicarVagaComponent, PesquisaVagasComponent
   ]
 })
 export class EmpresaModule { }
